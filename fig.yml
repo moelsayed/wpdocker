@@ -1,0 +1,26 @@
+
+
+data:
+  build: data/
+
+webserver:
+  build: webserver/
+  ports:
+    - "80:80"
+  volumes_from:
+    - data
+  links:
+    - appserver:appserver
+  
+appserver:
+  build: appserver/
+  volumes_from:
+    - data
+  links:
+    - database:db-instance
+
+database: 
+  build: database/
+  volumes_from:
+    - data
+  
